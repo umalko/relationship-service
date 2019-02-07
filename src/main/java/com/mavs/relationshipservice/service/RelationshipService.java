@@ -1,14 +1,15 @@
 package com.mavs.relationshipservice.service;
 
+import com.mavs.relationshipservice.dto.RelationshipDto;
 import com.mavs.relationshipservice.model.Person;
 
 import java.util.Set;
 
 public interface RelationshipService {
 
-    void addRelationship(String personEmail, String newPersonRelationshipEmail);
+    void addRelationship(RelationshipDto relationshipDto);
 
-    void removeRelationship(String personEmail, String personRelationshipEmail);
+    void removeRelationship(RelationshipDto relationshipDto);
 
     Set<Person> getAllRelationships(String personEmail);
 

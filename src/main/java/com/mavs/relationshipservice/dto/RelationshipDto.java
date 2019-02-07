@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class RelationshipDto {
 
     private String personEmail;
-    private String newPersonRelationshipEmail;
+    private String personRelationshipEmail;
 }

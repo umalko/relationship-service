@@ -1,6 +1,6 @@
 package com.mavs.relationshipservice.client;
 
-import com.mavs.relationshipservice.dto.UserDto;
+import com.mavs.activity.dto.ActivityUserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface UserClient {
 
     @GetMapping("/api/v1/users/email/{email}")
-    UserDto findUserByEmail(@PathVariable("email") String email);
+    ActivityUserDto findUserByEmail(@PathVariable("email") String email);
 }

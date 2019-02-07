@@ -30,17 +30,11 @@ public class RelationshipController {
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public void addRelationship(@RequestBody RelationshipDto relationshipDto) {
-        String newPersonRelationshipEmail = relationshipDto.getNewPersonRelationshipEmail();
-        String personEmail = relationshipDto.getPersonEmail();
-        log.info("New relationship with {} and {}", personEmail, newPersonRelationshipEmail);
-        relationshipService.addRelationship(personEmail, newPersonRelationshipEmail);
+        relationshipService.addRelationship(relationshipDto);
     }
 
     @DeleteMapping
     public void removeRelationship(@RequestBody RelationshipDto relationshipDto) {
-        String newPersonRelationshipEmail = relationshipDto.getNewPersonRelationshipEmail();
-        String personEmail = relationshipDto.getPersonEmail();
-        log.info("New relationship with {} and {}", personEmail, newPersonRelationshipEmail);
-        relationshipService.removeRelationship(personEmail, newPersonRelationshipEmail);
+        relationshipService.removeRelationship(relationshipDto);
     }
 }

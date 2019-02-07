@@ -68,6 +68,13 @@
             <artifactId>guava</artifactId>
             <version>27.0-jre</version>
         </dependency>
+
+        <!-- custom libs -->
+        <dependency>
+            <groupId>com.mavs</groupId>
+            <artifactId>activity-lib</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
