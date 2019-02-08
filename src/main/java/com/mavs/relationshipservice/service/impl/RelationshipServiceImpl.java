@@ -16,6 +16,7 @@ import com.mavs.relationshipservice.repository.PersonRepository;
 import com.mavs.relationshipservice.service.RelationshipService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ import java.util.Set;
 
 @Slf4j
 @Service
+@Transactional
 public class RelationshipServiceImpl implements RelationshipService {
 
     private final PersonRepository personRepository;
@@ -63,7 +65,6 @@ public class RelationshipServiceImpl implements RelationshipService {
         savePersonsIfNotExist(Lists.newArrayList(personEmail, personRelationshipEmail));
         Person person = removeRelationshipToPerson(personEmail, personRelationshipEmail);
         personRepository.save(person);
-
         sendActivity(personEmail, personRelationshipEmail, RelationshipType.END, ActivityType.END_RELATIONSHIP);
     }
 
@@ -77,8 +78,9 @@ public class RelationshipServiceImpl implements RelationshipService {
 
     private Person removeRelationshipToPerson(String personEmail, String personRelationshipEmail) {
         Person person = personRepository.findByEmail(personEmail).get();
-        Person newFriend = personRepository.findByEmail(personRelationshipEmail).get();
-        removeFriend(person, newFriend);
+        Person friend = personRepository.findByEmail(personRelationshipEmail).get();
+        removeFriend(person, friend);
+        removeFriend(friend, person);
         return person;
     }
 
