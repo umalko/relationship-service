@@ -12,6 +12,7 @@ import com.mavs.activity.util.ActivityUtil;
 import com.mavs.relationshipservice.client.UserClient;
 import com.mavs.relationshipservice.dto.RelationshipDto;
 import com.mavs.relationshipservice.model.Person;
+import com.mavs.relationshipservice.model.PersonType;
 import com.mavs.relationshipservice.repository.PersonRepository;
 import com.mavs.relationshipservice.service.RelationshipService;
 import lombok.extern.slf4j.Slf4j;
@@ -95,8 +96,13 @@ public class RelationshipServiceImpl implements RelationshipService {
         personsEmails.forEach(personEmail -> {
             Optional<Person> personOptional = personRepository.findByEmail(personEmail);
             if (!personOptional.isPresent()) {
-                ActivityUserDto userDto = userClient.findUserByEmail(personEmail);
-                personRepository.save(new Person(userDto.getEmail()));
+                Optional<ActivityUserDto> userOptional = userClient.findUserByEmail(personEmail);
+                if (userOptional.isPresent()) { // checked user. Exist in the system
+                    personRepository.save(new Person(userOptional.get().getEmail(), PersonType.CHECKED));
+                } else { // unchecked user. Validate again later.
+                    log.error("User Service is unavailable! User {} wasn't checked!", personEmail);
+                    personRepository.save(new Person(personEmail, PersonType.UNCHECKED));
+                }
             }
         });
     }

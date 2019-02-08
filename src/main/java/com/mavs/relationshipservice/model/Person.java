@@ -27,11 +27,14 @@ public class Person {
 
     private String email;
 
+    private PersonType personType;
+
     @Relationship(type = "FRIEND", direction = Relationship.UNDIRECTED)
     private Set<Person> friends;
 
-    public Person(String email) {
+    public Person(String email, PersonType personType) {
         this.email = email;
+        this.personType = personType;
     }
 
     public String toString() {

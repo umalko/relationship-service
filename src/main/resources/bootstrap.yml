@@ -8,3 +8,6 @@ spring:
       password: neo
 server:
   port: 8072
+feign:
+  hystrix:
+    enabled: true
