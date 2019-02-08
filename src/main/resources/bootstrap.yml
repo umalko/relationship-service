@@ -2,12 +2,3 @@
 spring:
   application:
     name: relationship-service
-  data:
-    neo4j:
-      username: neo4j
-      password: neo
-server:
-  port: 8072
-feign:
-  hystrix:
-    enabled: true
